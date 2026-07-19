@@ -1,7 +1,8 @@
-import FoodCardSkeleton from "@/components/FoodCardSkeleton/FoodCardSkeleton";
+import ReviewCardSkeleton from '@/components/ReviewCardSkeleton/ReviewCardSkeleton';
+import React from 'react';
 
-const Loading = () => {
-  return (
+const ReviewLoading = () => {
+    return (
     <section className="py-16">
       {/* Heading Skeleton */}
       <div className="text-center py-12">
@@ -25,12 +26,12 @@ const Loading = () => {
 
       {/* Cards */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        {[...Array(12)].map((_, index) => (
-          <FoodCardSkeleton key={index} />
-        ))}
+            {
+                [...Array(12)].map((_, index) => <ReviewCardSkeleton key={index}/>)
+            }
       </div>
     </section>
-  );
+    );
 };
 
-export default Loading;
+export default ReviewLoading;

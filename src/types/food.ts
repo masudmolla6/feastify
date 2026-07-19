@@ -22,3 +22,9 @@ export interface SingleFoodResponse {
   message: string;
   send_at: string;
 }
+
+export type SearchProps = {
+  searchParams: Promise<{
+    search?: string;
+  }>;
+};

@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { ShoppingCart, Eye } from "lucide-react";
 import { Food } from "@/types/food";
+import CartButton from "../buttons/CartButton/CartButton";
+import style from "../../app/foods/Foods.module.css"
 
 interface FoodCardProps {
   food: Food;
@@ -9,7 +11,7 @@ interface FoodCardProps {
 
 const FoodCard = ({ food }: FoodCardProps) => {
   return (
-    <div className="group overflow-hidden rounded-2xl border border-base-300 bg-base-100 shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+    <div className={`group overflow-hidden rounded-2xl border border-base-300  shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl bg-gray-800`}>
       {/* Image */}
       <figure className="relative h-60 overflow-hidden">
         <Image
@@ -36,10 +38,7 @@ const FoodCard = ({ food }: FoodCardProps) => {
 
         {/* Buttons */}
         <div className="grid grid-cols-2 gap-3">
-          <button className="btn btn-primary">
-            <ShoppingCart size={18} />
-            Add Cart
-          </button>
+          <CartButton food={food}></CartButton>
 
           <Link
             href={`/foods/${food.id}`}

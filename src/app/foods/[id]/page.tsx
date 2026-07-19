@@ -7,7 +7,7 @@ import {
   PlayCircle,
   UtensilsCrossed,
 } from "lucide-react";
-import { FoodDetails } from "@/types/food";
+import { Food, SingleFoodResponse } from "@/types/food";
 
 interface FoodDetailsPageProps {
   params: Promise<{
@@ -16,18 +16,14 @@ interface FoodDetailsPageProps {
 }
 
 const getSingleFood = async (
-  id: string
-): Promise<FoodDetails | null> => {
+  id: string): Promise<Food | null> => {
   const res = await fetch(
     `https://taxi-kitchen-api.vercel.app/api/v1/foods/${id}`,
-    {
-      cache: "no-store",
-    }
   );
 
   if (!res.ok) return null;
 
-  const data = await res.json();
+  const data:SingleFoodResponse = await res.json();
 
   return data.details;
 };
