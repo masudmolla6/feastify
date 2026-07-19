@@ -9,6 +9,10 @@ import {
 } from "lucide-react";
 import { Food, SingleFoodResponse } from "@/types/food";
 
+export function generateStaticParams() {
+  return [{ id: '52972' }, { id: '52973' }, { id: '52975' }]
+}
+
 interface FoodDetailsPageProps {
   params: Promise<{
     id: string;
