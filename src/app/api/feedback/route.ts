@@ -10,26 +10,36 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-    const body=await request.json();
-    console.log(body);
-    
-    const {message}=body;
+    const body = await request.json();
 
-    if(!message || typeof message !== "string"){
-        return Response.json({
-            status:200,
-            message:"Please Send a Message."
-        });
+    const { name, role, image, rating, message, date } = body;  
+    
+
+    if (
+    !name ||
+    !role ||
+    !image ||
+    !message ||
+    typeof rating !== "number"
+    ) {
+    return Response.json(
+        {
+        message: "Please fill all fields.",
+        },
+        {
+        status: 400,
+        }
+    );
     }
 
-    const newFeedback={
-            name: "Sakib Al Hasan",
-            role: "Player",
-            image: "https://randomuser.me/api/portraits/women/4.jpg",
-            rating: 5,
-            message,
-            date:new Date().toISOString()
-        }
+        const newFeedback = {
+        name,
+        role,
+        image,
+        rating,
+        message,
+        date,
+        };
 
         const result=await feedbackCollection.insertOne(newFeedback);
 

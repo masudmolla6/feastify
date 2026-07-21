@@ -1,9 +1,9 @@
-import React from 'react';
+import FeedbackForm from '@/components/forms/FeedbackForms';
 
 const AddFeedback = () => {
     return (
         <div>
-            <h2>Add New Feedback.</h2>
+            <FeedbackForm />
         </div>
     );
 };

@@ -7,3 +7,5 @@ export interface Feedback {
   message: string;
   date: string;
 }
+
+export type FeedbackFormData = Omit<Feedback, "_id" | "date">;
