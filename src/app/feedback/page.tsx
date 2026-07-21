@@ -5,7 +5,8 @@ import Link from "next/link";
 
 const getFeedback = async (): Promise<Feedback[]> => {
   const res = await fetch("http://localhost:3000/api/feedback", {
-    cache: "no-store",
+    cache: "force-cache",
+    next:{revalidate:60},
   });
 
   if (!res.ok) {

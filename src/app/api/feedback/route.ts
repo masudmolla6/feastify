@@ -1,4 +1,5 @@
 import { connect } from "@/app/lib/dbConnection";
+import { revalidatePath } from "next/cache";
 
 
 const feedbackCollection=connect("feedbacks");
@@ -42,6 +43,8 @@ export async function POST(request: Request) {
         };
 
         const result=await feedbackCollection.insertOne(newFeedback);
+
+        revalidatePath("/feedback")
 
 
 
