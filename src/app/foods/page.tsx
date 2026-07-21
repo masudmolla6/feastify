@@ -2,6 +2,7 @@ import FoodCard from "@/components/FoodCard/FoodCard";
 import { Food, FoodsResponse, SearchProps } from "@/types/food";
 import CartItems from "./CartItems";
 import InputSearch from "@/components/buttons/InputSearch/InputSearch";
+import { Metadata } from "next";
 
 const getFoods=async(search:string):Promise<Food[]>=>{
     const res=await fetch(`https://taxi-kitchen-api.vercel.app/api/v1/foods/random?search=${search}`,
@@ -13,6 +14,12 @@ const getFoods=async(search:string):Promise<Food[]>=>{
     
     return data.foods || [];
 }
+
+export const metadata: Metadata = {
+  title: "All Fooda",
+  description: "Best Food In Bangladesh",
+};
+
 const Foods = async ({ searchParams }: SearchProps) => {
     
     const {search=""}=await searchParams;

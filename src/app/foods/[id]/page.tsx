@@ -8,6 +8,8 @@ import {
   UtensilsCrossed,
 } from "lucide-react";
 import { Food, SingleFoodResponse } from "@/types/food";
+import { Metadata, ResolvingMetadata } from "next";
+import { title } from "process";
 
 export function generateStaticParams() {
   return [{ id: '52972' }, { id: '52973' }, { id: '52975' }]
@@ -17,6 +19,35 @@ interface FoodDetailsPageProps {
   params: Promise<{
     id: string;
   }>;
+}
+
+type Props = {
+  params: Promise<{
+    id: string;
+  }>;
+  searchParams: Promise<{
+    [key: string]: string | string[] | undefined;
+  }>;
+};
+
+
+export async function generateMetadata(
+  { params }: Props
+): Promise<Metadata>{
+
+  const {id} = await params;
+ 
+  // fetch post information
+    const res = await fetch(
+      `https://taxi-kitchen-api.vercel.app/api/v1/foods/${id}`,
+    );
+ 
+    const {details = {}}=await res.json();
+
+    return {
+      title:details.title,
+    }
+
 }
 
 const getSingleFood = async (

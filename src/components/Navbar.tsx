@@ -3,8 +3,8 @@ import Link from "next/link";
 
 const Navbar = () => {
     const navItems=<>
-                <li><Link href="/foods">Foods</Link></li>
-                <li><Link href="/reviews">Reviews</Link></li>
+        <li><Link prefetch={false} href="/foods">Foods</Link></li>
+        <li><Link prefetch={false} href="/reviews">Reviews</Link></li>
     </>
     return (
         <div className="navbar bg-base-100 shadow-sm flex justify-between">
@@ -22,7 +22,7 @@ const Navbar = () => {
                 <Link href="/" className="btn btn-ghost text-xl">
                     <Image
                         src="/logo.png"
-                        alt="SavorySpot Logo"
+                        alt="Feastify Logo"
                         width={80}
                         height={80}
                     />
