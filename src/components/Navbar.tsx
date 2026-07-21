@@ -5,6 +5,7 @@ const Navbar = () => {
     const navItems=<>
         <li><Link prefetch={false} href="/foods">Foods</Link></li>
         <li><Link prefetch={false} href="/reviews">Reviews</Link></li>
+        <li><Link prefetch={false} href="/feedback">Feedback</Link></li>
     </>
     return (
         <div className="navbar bg-base-100 shadow-sm flex justify-between">
