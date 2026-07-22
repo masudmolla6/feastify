@@ -10,6 +10,7 @@ import {
 import { Food, SingleFoodResponse } from "@/types/food";
 import { Metadata, ResolvingMetadata } from "next";
 import { title } from "process";
+import { redirect } from "next/navigation";
 
 export function generateStaticParams() {
   return [{ id: '52972' }, { id: '52973' }, { id: '52975' }]
@@ -70,20 +71,21 @@ const FoodDetailsPage = async ({
 
   const food = await getSingleFood(id);
 
-  if (!food) {
-    return (
-      <div className="flex min-h-[70vh] items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-4xl font-bold">
-            Food Not Found 😢
-          </h2>
+  if (!food?.title) {
+    redirect("/foods");
+    // return (
+    //   <div className="flex min-h-[70vh] items-center justify-center">
+    //     <div className="text-center">
+    //       <h2 className="text-4xl font-bold">
+    //         Food Not Found 😢
+    //       </h2>
 
-          <Link href="/foods" className="btn btn-primary mt-8">
-            Back to Menu
-          </Link>
-        </div>
-      </div>
-    );
+    //       <Link href="/foods" className="btn btn-primary mt-8">
+    //         Back to Menu
+    //       </Link>
+    //     </div>
+    //   </div>
+    // );
   }
 
   return (

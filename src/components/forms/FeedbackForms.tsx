@@ -1,9 +1,11 @@
 "use client";
 
 import { FeedbackFormData } from "@/types/feedback";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 const FeedbackForm = () => {
+  const router=useRouter();
   const {
     register,
     handleSubmit,
@@ -34,6 +36,7 @@ const FeedbackForm = () => {
         const result = await res.json();
 
         console.log(result);
+        router.push("/feedback");
 
       reset();
     } catch (error) {
