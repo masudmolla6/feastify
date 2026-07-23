@@ -11,18 +11,22 @@ const feedbackCollection = connect("feedbacks");
 // ==========================================
 
 const getFeedback = async (): Promise<Feedback[]> => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_server}/api/feedback`,
-    {
-      cache: "no-store",
-    }
-  );
+  try {
+    const feedbacks = await feedbackCollection.find().toArray();
 
-  if (!res.ok) {
+    return feedbacks.map((feedback) => ({
+      _id: feedback._id.toString(),
+      name: feedback.name,
+      role: feedback.role,
+      image: feedback.image,
+      rating: feedback.rating,
+      message: feedback.message,
+      date: feedback.date,
+    }));
+  } catch (error) {
+    console.error(error);
     throw new Error("Failed to fetch feedback");
   }
-
-  return res.json();
 };
 
 // ==========================================
