@@ -22,7 +22,7 @@ const Navbar = () => {
                 </div>
                 <Link href="/" className="btn btn-ghost text-xl">
                     <Image
-                        src="/public/logo.png"
+                        src="/logo.png"
                         alt="Feastify Logo"
                         width={80}
                         height={80}

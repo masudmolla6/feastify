@@ -11,23 +11,18 @@ const feedbackCollection = connect("feedbacks");
 // ==========================================
 
 const getFeedback = async (): Promise<Feedback[]> => {
-  try {
-    const feedbacks = await feedbackCollection.find().toArray();
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_server}/api/feedback`,
+    {
+      cache: "no-store",
+    }
+  );
 
-    // MongoDB ObjectId -> string
-    return feedbacks.map((feedback) => ({
-      _id: feedback._id.toString(),
-      name: feedback.name,
-      role: feedback.role,
-      image: feedback.image,
-      rating: feedback.rating,
-      message: feedback.message,
-      date: feedback.date,
-    })) as Feedback[];
-  } catch (error) {
-    console.error("Failed to fetch feedback:", error);
+  if (!res.ok) {
     throw new Error("Failed to fetch feedback");
   }
+
+  return res.json();
 };
 
 // ==========================================

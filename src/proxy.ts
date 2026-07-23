@@ -4,24 +4,16 @@ export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // ==========================================
-  // Allow All API Routes
-  // ==========================================
-
-  if (pathname.startsWith("/api")) {
-    return NextResponse.next();
-  }
-
-  // ==========================================
   // Maintenance Time (12 AM - 6 AM)
   // ==========================================
 
-  const currentHour = new Date().getHours();
+  // const currentHour = new Date().getHours();
 
-  if (currentHour >= 0 && currentHour < 6) {
-    return NextResponse.redirect(
-      new URL("/maintenance", request.url)
-    );
-  }
+  // if (currentHour >= 0 && currentHour < 6) {
+  //   return NextResponse.redirect(
+  //     new URL("/maintenance", request.url)
+  //   );
+  // }
 
   // ==========================================
   // Food Details Redirect
@@ -36,6 +28,23 @@ export function proxy(request: NextRequest) {
   }
 
   // ==========================================
+  // Feedback API Only
+  // ==========================================
+
+  // if (pathname.startsWith("/api")) {
+  //   if (!pathname.startsWith("/api/feedback")) {
+  //     return NextResponse.json(
+  //       {
+  //         message: "API Not Found",
+  //       },
+  //       {
+  //         status: 404,
+  //       }
+  //     );
+  //   }
+  // }
+
+  // ==========================================
   // Continue Request
   // ==========================================
 
@@ -44,8 +53,7 @@ export function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/api/:path*",
+    // "/api/:path*",
     "/food-details/:path*",
-    "/((?!_next|favicon.ico).*)", // সব page-এর জন্য
   ],
 };
