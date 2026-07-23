@@ -4,6 +4,14 @@ export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // ==========================================
+  // Allow All API Routes
+  // ==========================================
+
+  if (pathname.startsWith("/api")) {
+    return NextResponse.next();
+  }
+
+  // ==========================================
   // Maintenance Time (12 AM - 6 AM)
   // ==========================================
 
@@ -28,23 +36,6 @@ export function proxy(request: NextRequest) {
   }
 
   // ==========================================
-  // Feedback API Only
-  // ==========================================
-
-  if (pathname.startsWith("/api")) {
-    if (!pathname.startsWith("/api/feedback")) {
-      return NextResponse.json(
-        {
-          message: "API Not Found",
-        },
-        {
-          status: 404,
-        }
-      );
-    }
-  }
-
-  // ==========================================
   // Continue Request
   // ==========================================
 
@@ -55,5 +46,6 @@ export const config = {
   matcher: [
     "/api/:path*",
     "/food-details/:path*",
+    "/((?!_next|favicon.ico).*)", // সব page-এর জন্য
   ],
 };
