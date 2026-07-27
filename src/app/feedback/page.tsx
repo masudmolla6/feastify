@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import FeedbackCard from "@/components/FeedbackCard/FeedbackCard";
 import { connect } from "@/app/lib/dbConnection";
 import { Feedback } from "@/types/feedback";

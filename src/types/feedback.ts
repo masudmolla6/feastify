@@ -1,5 +1,4 @@
-export interface Feedback {
-  _id: string;
+export interface NewFeedback {
   name: string;
   role: string;
   image: string;
@@ -8,4 +7,8 @@ export interface Feedback {
   date: string;
 }
 
-export type FeedbackFormData = Omit<Feedback, "_id" | "date">;
+export interface Feedback extends NewFeedback {
+  _id: string;
+}
+
+export type FeedbackFormData = Omit<NewFeedback, "date">;

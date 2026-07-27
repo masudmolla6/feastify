@@ -1,10 +1,19 @@
 "use client";
 
-import { FeedbackFormData } from "@/types/feedback";
+import { FeedbackFormData, NewFeedback } from "@/types/feedback";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
-const FeedbackForm = () => {
+interface FeedbackFormProps {
+  postFeedback: (
+    data: NewFeedback
+  ) => Promise<{
+    success: boolean;
+    insertedId: string;
+  }>;
+}
+
+const FeedbackForm = ({postFeedback}:FeedbackFormProps) => {
   const router=useRouter();
   const {
     register,
@@ -20,23 +29,27 @@ const FeedbackForm = () => {
     };
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_server}/api/feedback`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+      // const res = await fetch(`${process.env.NEXT_PUBLIC_server}/api/feedback`, {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify(payload),
+      // });
 
-      if (!res.ok) {
-        throw new Error("Failed to add feedback.");
-      }
+      console.log(payload);
+      const result=await postFeedback(payload);
 
-      alert("Feedback Added Successfully.");
-        const result = await res.json();
+      // if (!res.ok) {
+      //   throw new Error("Failed to add feedback.");
+      // }
 
-        console.log(result);
-        router.push("/feedback");
+      // alert("Feedback Added Successfully.");
+      //   const result = await res.json();
+
+      console.log(result);
+      router.replace("/feedback");
+      router.refresh();
 
       reset();
     } catch (error) {
