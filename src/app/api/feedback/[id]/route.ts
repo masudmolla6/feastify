@@ -1,4 +1,4 @@
-import { connect } from "@/app/lib/dbConnection";
+import { connect } from "@/lib/dbConnection";
 import { ObjectId } from "mongodb";
 
 const feedbackCollection = connect("feedbacks");

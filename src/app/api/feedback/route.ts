@@ -1,4 +1,4 @@
-import { connect } from "@/app/lib/dbConnection";
+import { connect } from "@/lib/dbConnection";
 import { revalidatePath } from "next/cache";
 
 

@@ -1,35 +1,10 @@
 export const dynamic = "force-dynamic";
 
+import { getFeedback } from "@/action/server/feedback";
 import FeedbackCard from "@/components/FeedbackCard/FeedbackCard";
-import { connect } from "@/app/lib/dbConnection";
-import { Feedback } from "@/types/feedback";
 import { MessageSquareText } from "lucide-react";
 import Link from "next/link";
 
-const feedbackCollection = connect("feedbacks");
-
-// ==========================================
-// Get All Feedback
-// ==========================================
-
-const getFeedback = async (): Promise<Feedback[]> => {
-  try {
-    const feedbacks = await feedbackCollection.find().toArray();
-
-    return feedbacks.map((feedback) => ({
-      _id: feedback._id.toString(),
-      name: feedback.name,
-      role: feedback.role,
-      image: feedback.image,
-      rating: feedback.rating,
-      message: feedback.message,
-      date: feedback.date,
-    }));
-  } catch (error) {
-    console.error(error);
-    throw new Error("Failed to fetch feedback");
-  }
-};
 
 // ==========================================
 // Feedback Page
